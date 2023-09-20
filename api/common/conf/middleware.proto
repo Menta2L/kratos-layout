@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "github.com/Menta2L/kratos-layout/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Middleware {
+  message Auth {
+    string method = 1;
+    string key = 2;
+  }
+
+    message RateLimiter {
+    string name = 1;
+  }
+
+  message Metrics {
+    bool histogram = 1;
+    bool counter = 2;
+    bool gauge = 3;
+    bool summary = 4;
+  }
+
+  bool enable_logging = 1;
+  bool enable_recovery = 2;
+  bool enable_tracing = 3;
+  bool enable_validate = 4;
+  bool enable_circuit_breaker = 5;
+
+  RateLimiter limiter = 6;
+  Metrics metrics = 7;
+  Auth auth = 8;
+}

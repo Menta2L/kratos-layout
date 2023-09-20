@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package pagination;
+option go_package = "github.com/Menta2L/kratos-layout/gen/api/go/common/pagination;pagination";
+
+import "google/protobuf/any.proto";
+
+enum SortOrder {
+  UNSORTED = 0;
+  ASCENDING = 1;
+  DESCENDING = 2;
+}
+
+message PagingRequest {
+  optional int32 page = 1;
+
+  optional int32 pageSize = 2 [json_name = "pageSize"];
+
+  map<string, string> query = 3;
+
+  map<string, string> orderBy = 4 [json_name = "orderBy"];
+
+  optional bool nopaging = 5;
+}
+
+message PagingResponse {
+  int32 total = 1;
+  repeated google.protobuf.Any items = 2;
+}

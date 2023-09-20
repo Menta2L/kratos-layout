@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "github.com/Menta2L/kratos-layout/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+import "common/conf/middleware.proto";
+
+message Server {
+  // REST
+  message REST {
+    message CORS {
+      repeated string headers = 1;  //
+      repeated string methods = 2;  //
+      repeated string origins = 3;  //
+    }
+
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+    CORS cors = 4;
+    Middleware middleware = 5;
+  }
+
+  // gPRC
+  message GRPC {
+    string network = 1;
+    string addr = 2;
+    google.protobuf.Duration timeout = 3;
+    Middleware middleware = 4;
+  }
+
+  // Websocket
+  message Websocket {
+    string network = 1;
+    string addr = 2;
+    string path = 3;
+    google.protobuf.Duration timeout = 4;
+  }
+
+  // MQTT
+  message Mqtt {
+    string addr = 1;
+  }
+
+  // Kafka
+  message Kafka {
+    repeated string addrs = 1;
+  }
+
+  // RabbitMQ
+  message RabbitMQ {
+    repeated string addrs = 1;
+  }
+
+  REST rest = 1;
+  GRPC grpc = 2;
+  Websocket websocket = 3;
+  Mqtt mqtt = 4;
+  Kafka kafka = 5;
+  RabbitMQ rabbitmq = 6;
+}

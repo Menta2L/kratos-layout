@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "github.com/Menta2L/kratos-layout/gen/api/go/common/conf;conf";
+
+import "google/protobuf/duration.proto";
+
+message Data {
+  message Database {
+    string driver = 1;
+    string source = 2;
+    bool migrate = 3; 
+  }
+
+  // redis
+  message Redis {
+    string network = 1;
+    string addr = 2;
+    string password = 3;
+    int32 db = 4;
+    google.protobuf.Duration dial_timeout = 5;
+    google.protobuf.Duration read_timeout = 6;
+    google.protobuf.Duration write_timeout = 7;
+  }
+
+  // Kafka
+  message Kafka {
+    repeated string addrs = 1;
+    string codec = 2;
+  }
+
+  Database database = 1;
+  Redis redis = 2;
+  Kafka kafka = 3;
+}
