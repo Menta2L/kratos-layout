@@ -1,0 +1,23 @@
+input:
+  - message
+
+exclude:
+  - pattern: /svc/{{.Values.service.name}}
+    condition: "{{ not .Values.service.enabled }}"
+
+raw:
+  - "*.tpl"
+
+preHooks: []
+
+postHooks:
+  - name: go setup
+    script: |
+      go mod tidy
+      go fmt ./...
+
+  - name: git setup
+    script: |
+      git init
+      git add .
+      git commit -m "first commit"

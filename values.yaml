@@ -1,0 +1,13 @@
+git:
+  provider: github.com
+  user: bluebrown
+
+message: Hello, World!
+
+service:
+  enabled: true
+  name: labels
+
+# this is intended to be used with the tpl function
+# see doc.go for more information
+snippet: "{{ .Project.Name }}"

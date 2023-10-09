@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package common.conf;
+
+option go_package = "{{ .Project.Name }}/gen/api/go/common/conf;conf";
+
+message Logger {
+  // Zap
+  message Zap {
+    string filename = 1;
+    string level = 2;
+    int32 max_size = 3;
+    int32 max_age = 4;
+    int32 max_backups = 5;
+  }
+
+  // logrus
+  message Logrus {
+    string level = 1;
+    string formatter = 2;
+    string timestamp_format = 3;
+    bool disable_colors = 4;
+    bool disable_timestamp = 5;
+  }
+
+  // Fluent
+  message Fluent {
+    string endpoint = 1;
+  }
+
+  message Aliyun {
+    string endpoint = 1;
+    string project = 2;
+    string access_key = 3;
+    string access_secret = 4;
+  }
+
+  message Tencent {
+    string endpoint = 1;
+    string topic_id = 2;
+    string access_key = 3;
+    string access_secret = 4;
+  }
+
+  string type = 1;
+
+  Zap zap = 2;
+  Logrus logrus = 3;
+  Fluent fluent = 4;
+  Aliyun aliyun = 5;
+  Tencent tencent = 6;
+}
